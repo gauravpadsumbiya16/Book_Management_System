@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
  import { Link, useNavigate } from "react-router-dom";
 
 const Registration = () => {
+
     const navigate = useNavigate();
     const [data, setData] = useState({});
     const [error, setError] = useState(false);
+    const [e ,setE] = useState(false);
     const [pass, repPass] = useState("");
+    const url = process.env.REACT_APP_BACKEND_URL;
+
 
     useEffect(() => {
         const auth = localStorage.getItem('user');
@@ -13,6 +17,7 @@ const Registration = () => {
             navigate('/');
         }
     })
+    console.log("pass = ",data.pass," repPass = ",pass);
 
     return (
         <>
@@ -28,7 +33,10 @@ const Registration = () => {
                                             <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
                                             <form className="mx-1 mx-md-4">
-                                                {error && (data.pass !== pass) && <span className="invalid-input text-danger">*Password not matched</span>}
+                                                <div>
+                                                {e && (data.pass !== pass) && <span className="invalid-input text-danger">*Password not matched</span>}
+                                                
+                                                </div>
                                                 {error && !data.userName && <span className="invalid-input text-danger">*Enter UserName</span>}
                                                 <div className="d-flex flex-row align-items-center mb-4">
                                                     <i className="fas fa-user fa-lg me-3 fa-fw"></i>
@@ -62,12 +70,13 @@ const Registration = () => {
                                                     <label className="form-label" for="form3Example4c">Password</label>
                                                         <input type="password" id="form3Example4c" className="form-control"
                                                             onChange={(e) => {
+                                                                setData(setE(false))
                                                                 setData({ ...data, password: e.target.value });
                                                             }} />
                                                         
                                                     </div>
                                                 </div>
-
+                                                {error && !pass && <span className="invalid-input text-danger">*Enter React Password</span>}
                                                 <div className="d-flex flex-row align-items-center mb-4">
                                                     <i className="fas fa-key fa-lg me-3 fa-fw"></i>
                                                     <div className="form-outline flex-fill mb-0">
@@ -89,11 +98,11 @@ const Registration = () => {
                                                             }
                                                             else if (data.password !== pass) {
                                                                 console.log(data.password,"=== check ===",pass)
-                                                                setError(true);
+                                                                setE(true);
                                                                 return false;
                                                             }
                                                             else {
-                                                                fetch(`http://localhost:7000/api/v1/user/register`, {
+                                                                fetch(`${url}/api/v1/user/register`, {
                                                                     method: "POST",
                                                                     body: JSON.stringify(data),
                                                                     headers: {
@@ -105,7 +114,8 @@ const Registration = () => {
                                                                     localStorage.setItem("userName", JSON.stringify(result.user.userName));
                                                                     localStorage.setItem("token", JSON.stringify(result.token));
                                                                     navigate("/detail");
-                                                                });
+                                                                }).catch((e)=>{setE(true)
+                                                                    return false;});
                                                             }
                                                         }
                                                         }
