@@ -75,11 +75,16 @@ const Login = () =>{
                                                                     }
                                                                 }).then(async (result) => {
                                                                     result = await result.json();
-                                                                    localStorage.setItem("userRole", JSON.stringify(result.user.role));
-                                                                    localStorage.setItem("user", JSON.stringify(result.user._id));
-                                                                    localStorage.setItem("userName", JSON.stringify(result.user.userName));
-                                                                    localStorage.setItem("token", JSON.stringify(result.token));
-                                                                    navigate("/detail");
+                                                                    localStorage.setItem("userRole", result.user.role);
+                                                                    localStorage.setItem("user", result.user._id);
+                                                                    localStorage.setItem("userName", result.user.userName);
+                                                                    localStorage.setItem("token", result.token);
+                                                                    if (result.user.role ==="admin") {
+                                                                        navigate("/getAll");
+                                                                    }
+                                                                    else{
+                                                                        navigate("/detail");
+                                                                    }
                                                                 }).catch((e)=>{setE(true)
                                                                     return false;});
                                                             }

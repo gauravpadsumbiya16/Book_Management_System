@@ -6,7 +6,6 @@ exports.getAllBooksAdmin = async (req, res) => {
         let books = await Book.find();
         if (books.length > 0) {
             res.send(books);
-            console.log(books);
         }
         else {
             res.send({ result: "No book found !!" })

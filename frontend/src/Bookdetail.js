@@ -7,7 +7,7 @@ const Bookdetail = () => {
   const [error , setError] = useState(false);
   const navigate = useNavigate();
   //const port = process.env.REACT_APP_PORT;
-  const auth = JSON.parse(localStorage.getItem('user'));
+  const auth = localStorage.getItem('user');
 
   useEffect(() => {
     console.log(`http://localhost:7000/api/v1/book/${id}/${auth}`);

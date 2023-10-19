@@ -1,19 +1,19 @@
 import React from "react";
-import { Link, json, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const auth = localStorage.getItem('user');
-  const userName = localStorage.getItem("userName");
-  const userRole = localStorage.getItem("userRole");
-  console.log("auth ", auth, " userRole ", userRole);
+  let auth = localStorage.getItem('user');
+  let userName = localStorage.getItem("userName");
+  let userRole = localStorage.getItem("userRole");
   const navigate = useNavigate();
-
+  console.log("auth ", auth, " userRole ", userRole);
+  
   return (
     <>
       <div className="sticky-top">
         <nav className="navbar bg-dark navbar-dark">
           {auth
-            ? (auth === "652bf9f30f6c89466d2ec73b" && userRole === "admin" ? (
+            ? (auth && userRole === "admin") ? (
               console.log("\n\n\n\n nexted called"),
               <div className="d-flex justify-content-end container-fluid">
                 <Link className="navbar-brand" to="/getAll">
@@ -31,10 +31,11 @@ const Header = () => {
                     })
 
                 }} to="/register">
-                  logout ({JSON.parse(userName)})
+                  logout ({userName})
                 </Link>
               </div>
             ) : 
+            (
             console.log("\n\n\n\n nexted don't called"),
             <div className="container-fluid">
               <Link className="navbar-brand" to="/home">
@@ -55,7 +56,7 @@ const Header = () => {
                   })
 
               }} to="/register">
-                logout ({JSON.parse(userName)})
+                logout ({userName})
               </Link>
             </div>)
             : 

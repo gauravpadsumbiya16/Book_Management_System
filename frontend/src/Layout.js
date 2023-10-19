@@ -1,11 +1,12 @@
 import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Registration from "./Registration";
 
 function Layout() {
-  const auth = JSON.parse(localStorage.getItem('user'));
+  const auth = localStorage.getItem('user');
   return (
     <>
-      {auth ? <Outlet /> : <Navigate to="/register"/>}
+      {auth ? <Outlet /> : <Registration/>}
     </>
   );
 }

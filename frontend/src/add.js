@@ -5,7 +5,7 @@ function Add() {
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const [error, setError] = useState(false);
-  const auth = JSON.parse(localStorage.getItem('user'));
+  const auth = localStorage.getItem('user');
   //const port = process.env.REACT_APP_PORT;
 
   return (

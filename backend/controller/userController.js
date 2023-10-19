@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
+//registerUser
 
 exports.registerUser = async (req, res) => {
     try {
@@ -18,6 +19,7 @@ exports.registerUser = async (req, res) => {
     }
 };
 
+//Login User
 exports.loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -37,8 +39,7 @@ exports.loginUser = async (req, res) => {
             return false;
         }
         sendToken(user,200,res);
-        console.log("userId = ",user);
-        console.log("\n\n\n Login success \n\n\n");
+        console.log("Login success.............");
     }
     catch (error) {
         console.log(error);
@@ -57,7 +58,6 @@ exports.logoutUser = async(req,res)=>{
         success:true,
         message:"Loged Out",
     });
-    console.log("logout");
 };
 
 //Get all users
@@ -67,7 +67,6 @@ exports.getAllUser = async (req, res) => {
         let users = await User.find();
         if (users.length > 0) {
             res.send(users);
-            console.log(users);
         }
         else {
             res.send({ result: "No User found !!" })
@@ -86,3 +85,27 @@ exports.invalidRouteHandle = async (req,res)=>{
         console.log("error ", error)
     }
 }
+
+//UserRoleUpdate
+exports.updateUserRole = async (req,res) => {
+
+    const newUserData = {
+        userName:req.body.userName,
+        email:req.body.email,
+        role:req.body.role,
+    }
+    const newRole = ( newUserData.role === "admin") ? "user" : "admin";
+    
+    newUserData.role = newRole ;
+    
+    const user = await User.findByIdAndUpdate(req.params._id, newUserData,{
+        new:true,
+        runValidators:true,
+        userFindAndModify:false,
+    });
+    
+    res.status(200).json({
+        success:true,
+    });
+    
+}; 
