@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () =>{
 
+    const url = process.env.REACT_APP_BACKEND_URL;
     useEffect(() => {
         const auth = localStorage.getItem('user');
         if (auth) {
@@ -67,7 +68,7 @@ const Login = () =>{
                                                                 return false;
                                                             }
                                                             else {
-                                                                fetch(`http://localhost:7000/api/v1/user/login`, {
+                                                                fetch(`${url}/api/v1/user/login`, {
                                                                     method: "POST",
                                                                     body: JSON.stringify(data),
                                                                     headers: {

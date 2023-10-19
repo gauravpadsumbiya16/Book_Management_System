@@ -4,8 +4,11 @@ import { useNavigate } from "react-router-dom";
 const GetAllUser = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_BACKEND_URL;
+
+
   useEffect(() => {
-    fetch(`http://localhost:7000/api/v1/user/AllUsers/`)
+    fetch(`${url}/api/v1/user/AllUsers/`)
       .then((res) => { return res.json() })
       .then((result) => setData(result));
   })
@@ -21,7 +24,7 @@ const GetAllUser = () => {
               <h5 className="d-inline-block my-1"> {datas.role} </h5>
               <div className="d-flex justify-content-end">
                 <button className="mx-2 btn btn-success" onClick={() => {
-                    fetch(`http://localhost:7000/api/v1/user/updateRole/${datas._id}/`, {
+                    fetch(`${url}/api/v1/user/updateRole/${datas._id}/`, {
                       method: "PUT",
                       body: JSON.stringify(datas),
                       headers: {

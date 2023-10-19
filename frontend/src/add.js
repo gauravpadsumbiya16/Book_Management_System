@@ -7,6 +7,7 @@ function Add() {
   const [error, setError] = useState(false);
   const auth = localStorage.getItem('user');
   //const port = process.env.REACT_APP_PORT;
+  const url = process.env.REACT_APP_BACKEND_URL;
 
   return (
     <>
@@ -121,7 +122,8 @@ function Add() {
               else {
                 data.UserId = auth;
                 console.log(data);
-                fetch(`http://localhost:7000/api/v1/addBook/`, {
+                
+                fetch(`${url}/api/v1/addBook/`, {
                   method: "POST",
                   body: JSON.stringify(data),
                   headers: {
@@ -153,15 +155,3 @@ function Add() {
 }
 export { Add };
 
-/*
-fetch(`https://mernbackend-8fos.onrender.com/addBook`, {
-                  method: "POST",
-                  body: JSON.stringify(data),
-                  headers: {
-                    "Content-Type": "application/json"
-                  }
-                }).then(() => {
-                  console.log("data = ",data);
-                  navigate("/detail");
-                });
-*/

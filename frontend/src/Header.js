@@ -2,6 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+
+  const url = process.env.REACT_APP_BACKEND_URL;
   let auth = localStorage.getItem('user');
   let userName = localStorage.getItem("userName");
   let userRole = localStorage.getItem("userRole");
@@ -14,7 +16,6 @@ const Header = () => {
         <nav className="navbar bg-dark navbar-dark">
           {auth
             ? (auth && userRole === "admin") ? (
-              console.log("\n\n\n\n nexted called"),
               <div className="d-flex justify-content-end container-fluid">
                 <Link className="navbar-brand" to="/getAll">
                   GetAllProduct
@@ -23,7 +24,7 @@ const Header = () => {
                   GetAllUser
                 </Link>
                 <Link className="navbar-brand" onClick={() => {
-                  fetch(`http://localhost:7000/api/v1/user/logout`)
+                  fetch(`${url}/api/v1/user/logout`)
                     .then(() => {
                       return localStorage.clear();
                     }).then(() => {
@@ -36,7 +37,6 @@ const Header = () => {
               </div>
             ) : 
             (
-            console.log("\n\n\n\n nexted don't called"),
             <div className="container-fluid">
               <Link className="navbar-brand" to="/home">
                 Home
@@ -48,7 +48,7 @@ const Header = () => {
                 Add Book
               </Link>
               <Link className="navbar-brand" onClick={() => {
-                fetch(`http://localhost:7000/api/v1/user/logout`)
+                fetch(`${url}/api/v1/user/logout`)
                   .then(() => {
                     return localStorage.clear();
                   }).then(() => {

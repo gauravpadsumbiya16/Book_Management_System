@@ -7,11 +7,12 @@ const Bookdetail = () => {
   const [error , setError] = useState(false);
   const navigate = useNavigate();
   //const port = process.env.REACT_APP_PORT;
+  const url = process.env.REACT_APP_BACKEND_URL;
   const auth = localStorage.getItem('user');
 
   useEffect(() => {
-    console.log(`http://localhost:7000/api/v1/book/${id}/${auth}`);
-    fetch(`http://localhost:7000/api/v1/book/${id}/${auth}`)
+    console.log(`${url}/api/v1/book/${id}/${auth}`);
+    fetch(`${url}/api/v1/book/${id}/${auth}`)
       .then((res) => {
         return res.json();
       })
@@ -48,7 +49,7 @@ const Bookdetail = () => {
                   class="col-4 btn btn-lg btn-outline-danger"
                   onClick={() => {
                     fetch(
-                      `http://localhost:7000/api/v1/book/${id}/${auth}`,
+                      `${url}/api/v1/book/${id}/${auth}`,
                       { method: "DELETE" }
                     ).then(() => {
                       navigate("/detail");
@@ -171,7 +172,7 @@ const Bookdetail = () => {
                     }
                     else {
                       fetch(
-                        `http://localhost:7000/api/v1/book/${id}/${auth}`,
+                        `${url}/api/v1/book/${id}/${auth}`,
                         {
                           method: "PUT",
                           body: JSON.stringify(data),

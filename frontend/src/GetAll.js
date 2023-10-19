@@ -3,18 +3,20 @@ import { Link } from "react-router-dom";
 
 const GetAll = () => {
   const [data, setData] = useState([]);
+  const url = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     getBooks();
   }, [])
   const getBooks = () => {
-    fetch(`http://localhost:7000/api/v1/books`)
+    fetch(`${url}/api/v1/books`)
       .then((res) => { return res.json() })
       .then((result) => setData(result));
   }
   const searchHandle = async (event) => {
     let key = event.target.value;
     if (key) {
-      await fetch(`http://localhost:7000/api/v1/search/${key}`)
+      await fetch(`${url}/api/v1/search/${key}`)
         .then(res => res.json())
         .then((result) => setData(result));
     }
