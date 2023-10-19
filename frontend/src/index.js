@@ -13,7 +13,6 @@ import Registration from "./Registration";
 import Login from "./Login";
 import Header from "./Header";
 import Footer from "./Footer";
-import Logout from "./Logout";
 import GetAll from "./GetAll";
 import GetAllUser from "./GetAllUser";
 
@@ -24,7 +23,6 @@ root.render(
   // <>
   <BrowserRouter>
   <Header/>
-  <Logout/>
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Registration />}></Route>
