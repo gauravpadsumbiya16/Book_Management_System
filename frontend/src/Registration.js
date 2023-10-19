@@ -76,7 +76,7 @@ const Registration = () => {
                                                         
                                                     </div>
                                                 </div>
-                                                {error && !pass && <span className="invalid-input text-danger">*Enter React Password</span>}
+                                                {error && !pass && <span className="invalid-input text-danger">*Enter Repeat Password</span>}
                                                 <div className="d-flex flex-row align-items-center mb-4">
                                                     <i className="fas fa-key fa-lg me-3 fa-fw"></i>
                                                     <div className="form-outline flex-fill mb-0">
