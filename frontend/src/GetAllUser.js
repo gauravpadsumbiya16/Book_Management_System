@@ -16,9 +16,8 @@ const GetAllUser = () => {
   const Allusers = data.map((datas) => {
     return (
       <>
-        <div className="container h-100 my-3 border border-primary rounded">
+        <div className="container h-100 my-3">
           <div className="container my-3">
-            
             <div className="d-flex justify-content-center container-fluid">
               <h4 className="d-inline-block"> {datas.userName} </h4> &nbsp;&nbsp;&nbsp;
               <h5 className="d-inline-block my-1"> {datas.role} </h5>
@@ -41,12 +40,19 @@ const GetAllUser = () => {
             
           </div>
         </div>
-
       </>)
-    // <h5> {datas.userName} </h5>;
   });
 
-  return Allusers;
+  return (
+  <>
+  <div className="container h-100 my-3 border border-primary rounded">
+          <div className="container my-3">
+            <div className="d-flex flex-column mb-3 justify-content-center container-fluid">
+              {Allusers}
+            </div>
+          </div>
+        </div>
+  </>);
 }
 
 export default GetAllUser;

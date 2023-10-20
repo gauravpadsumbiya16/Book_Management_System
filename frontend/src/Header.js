@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+
+  useEffect(()=>{
+    const auth = localStorage.getItem('user');
+  })
 
   const url = process.env.REACT_APP_BACKEND_URL;
   let auth = localStorage.getItem('user');
   let userName = localStorage.getItem("userName");
   let userRole = localStorage.getItem("userRole");
   const navigate = useNavigate();
-  console.log("auth ", auth, " userRole ", userRole);
   
   return (
     <>
@@ -16,14 +19,14 @@ const Header = () => {
         <nav className="navbar bg-dark navbar-dark">
           {auth
             ? (auth && userRole === "admin") ? (
-              <div className="d-flex justify-content-end container-fluid">
+              <div className="d-inline-block d-flex justify-content-end container-fluid">
                 <Link className="navbar-brand" to="/getAll">
                   GetAllProduct
                 </Link>
                 <Link className="navbar-brand" to="/getAllUser">
                   GetAllUser
                 </Link>
-                <Link className="navbar-brand" onClick={() => {
+                <button className="d-inline-block btn btn-dark" onClick={() => {
                   fetch(`${url}/api/v1/user/logout`)
                     .then(() => {
                       return localStorage.clear();
@@ -31,9 +34,9 @@ const Header = () => {
                       navigate('/register');
                     })
 
-                }} to="/register">
+                }} >
                   logout ({userName})
-                </Link>
+                </button>
               </div>
             ) : 
             (
@@ -47,17 +50,17 @@ const Header = () => {
               <Link className="navbar-brand" to="/addBook">
                 Add Book
               </Link>
-              <Link className="navbar-brand" onClick={() => {
-                fetch(`${url}/api/v1/user/logout`)
-                  .then(() => {
-                    return localStorage.clear();
-                  }).then(() => {
-                    navigate('/register');
-                  })
+              <button className="btn btn-dark btn btn-dark" onClick={() => {
+                  fetch(`${url}/api/v1/user/logout`)
+                    .then(() => {
+                      return localStorage.clear();
+                    }).then(() => {
+                      navigate('/register');
+                    })
 
-              }} to="/register">
-                logout ({userName})
-              </Link>
+                }} >
+                  logout ({userName})
+                </button>
             </div>)
             : 
               <div className="d-flex justify-content-end container-fluid">

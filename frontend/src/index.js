@@ -18,6 +18,11 @@ import GetAllUser from "./GetAllUser";
 
 const rootElement = document.getElementById("root");
 const root = ReactDOM.createRoot(rootElement);
+let auth = localStorage.getItem('user');
+
+if (auth!==null) {
+ localStorage.clear();
+}
 
 root.render(
   // <>

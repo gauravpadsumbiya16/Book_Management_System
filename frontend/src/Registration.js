@@ -17,11 +17,10 @@ const Registration = () => {
             navigate('/');
         }
     })
-    console.log("pass = ", data.pass, " repPass = ", pass);
 
     return (
         <>
-            <section style={{ backgroundColor: `#eee` }}>
+            <section className="vh" style={{ backgroundColor: `#eee` }}>
                 <div className="container h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-lg-12 col-xl-11">
